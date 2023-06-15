@@ -25,3 +25,32 @@ foreach (var department in departments)
     Console.WriteLine();
     Console.WriteLine();
 }
+
+var productRepository = new DapperProductRepository(conn);
+
+var productToUpdate = productRepository.GetProduct(940);
+
+productToUpdate.Name = "UPDATED!!!";
+productToUpdate.CategoryID = 1;
+productToUpdate.OnSale = false;
+productToUpdate.Price = 12.99;
+productToUpdate.StockLevel = 1000;
+
+productRepository.UpdateProducts(productToUpdate);
+
+productRepository.DeleteProduct(940);
+
+var products = productRepository.GetAllProducts();
+foreach (var product in products)
+{
+    Console.WriteLine(product.ProductID);
+    Console.WriteLine(product.Name);
+    Console.WriteLine(product.Price);
+    Console.WriteLine(product.CategoryID);
+    Console.WriteLine(product.OnSale);
+    Console.WriteLine(product.StockLevel);
+    Console.WriteLine();
+    Console.WriteLine();
+
+
+}
